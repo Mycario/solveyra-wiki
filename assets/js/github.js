@@ -1,5 +1,5 @@
 function loadGithubConfig() {
-  window.GITHUB_OWNER = sessionStorage.getItem('null_gh_owner') || '';
+  window.GITHUB_OWNER = sessionStorage.getItem('null_gh_owner') || 'Mycario';
   window.GITHUB_TOKEN = sessionStorage.getItem('null_gh_token') || '';
   window.GITHUB_REPO = 'Nullward-wiki';
   window.GITHUB_BRANCH = 'main';

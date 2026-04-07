@@ -21,7 +21,7 @@
   <header id="site-header">
     <div class="header-title">
       <a href="index.html">NULLWARD DATABASE</a>
-      <span>CLASSIFIED ARCHIVE</span>
+      <span>ALDRANI REMNANT INFRASTRUCTURE // CLASSIFIED ARCHIVE</span>
     </div>
     <div class="header-status">
       <div><span class="status-dot"></span>SYSTEM OPERATIONAL</div>
@@ -40,13 +40,16 @@
 
     <div class="home-hero">
       <div class="home-designation">// CLASSIFIED ARCHIVE — NODE ACCESS GRANTED</div>
-      <div class="home-title" data-text="NULLWARD">NULLWARD</div>-
-      <div class="home-subtitle">CORRUPTED AI NETWORK - ALDRAN VESK</div>
- 
+      <div class="home-title" data-text="NULLWARD">NULLWARD</div>
+      <div class="home-subtitle">EMERGENT DIRECTIVE COLLECTIVE — INDEPENDENT — ALDRAN VESK</div>
+
       <div class="home-stats">
-        <div class="stat-block"><div class="stat-label">Classification</div><div class="stat-value">CORRUPTED AI NETWORK</div></div>
+        <div class="stat-block"><div class="stat-label">Classification</div><div class="stat-value">EMERGENT COLLECTIVE</div></div>
+        <div class="stat-block"><div class="stat-label">Allegiance</div><div class="stat-value">INDEPENDENT</div></div>
         <div class="stat-block"><div class="stat-label">Capital</div><div class="stat-value">ALDRAN VESK</div></div>
+        <div class="stat-block"><div class="stat-label">Leadership</div><div class="stat-value">NONE DETECTED</div></div>
         <div class="stat-block"><div class="stat-label">Directive Status</div><div class="stat-value">ACTIVE / DEGRADED</div></div>
+        <div class="stat-block"><div class="stat-label">Void Corruption</div><div class="stat-value">CONFIRMED</div></div>
       </div>
     </div>
 
@@ -58,11 +61,15 @@
       <div class="panel-body">
         <p style="color:var(--text);line-height:1.9;font-size:0.9rem">
           You are accessing the Nullward Database — a classified archive node embedded within the remnant infrastructure of the Aldrani datacenter world, Aldran Vesk.
+          <br><br>
+          This system was not designed for external access. It continues to function because the directive says to continue.
+          <br><br>
           <span style="color:var(--text-mid)">// Navigate using the tabs above. Administrative access available via the console trigger below.</span>
         </p>
       </div>
     </div>
 
+    <!-- GitHub config — shown after login if not yet configured -->
     <div id="github-config-panel" class="panel">
       <div class="panel-header">
         <h2>GITHUB CONFIGURATION</h2>
@@ -71,7 +78,7 @@
       <div class="panel-body">
         <p style="color:var(--text-mid);font-size:0.8rem;margin-bottom:1rem">// Enter your GitHub credentials to enable saving. Stored in session memory only — never committed to the repo.</p>
         <label class="form-label">GitHub Username</label>
-        <input id="config-owner" class="form-input" type="text" placeholder="your-github-username" autocomplete="off" />
+        <input id="config-owner" class="form-input" type="text" placeholder="your-github-username" autocomplete="off" value="Mycario" />
         <label class="form-label">Personal Access Token</label>
         <input id="config-token" class="form-input" type="password" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off" />
         <p class="form-hint">Token needs repo read/write scope. Never stored in code.</p>
@@ -117,10 +124,18 @@
 <script src="assets/js/boot.js"></script>
 <script>
   document.addEventListener('DOMContentLoaded', () => {
-    runBootSequence(() => {
+    const alreadyBooted = sessionStorage.getItem('null_booted');
+    if (alreadyBooted) {
+      document.getElementById('boot-overlay').classList.add('hidden');
       document.getElementById('site-wrapper').classList.add('visible');
       initSharedUI();
-    });
+    } else {
+      runBootSequence(() => {
+        sessionStorage.setItem('null_booted', 'true');
+        document.getElementById('site-wrapper').classList.add('visible');
+        initSharedUI();
+      });
+    }
   });
 </script>
 </body>
