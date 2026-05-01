@@ -21,6 +21,10 @@
     </div>
   </header>
 
+  <div id="search-bar-container">
+    <input id="global-search-input" type="text" placeholder="SEARCH ENTRIES..." maxlength="100" />
+  </div>
+
   <nav id="site-nav">
     <a class="nav-link" href="index.html" onclick="SFX&&SFX.click()">// HOME</a>
     <a class="nav-link" href="overview.html" onclick="SFX&&SFX.click()">// OVERVIEW</a>
@@ -34,6 +38,17 @@
     <div class="editor-bar" id="editor-bar">
       <span class="editor-bar-label">// EDITOR MODE ACTIVE</span>
       <button class="add-entry-btn" id="species-add-btn">+ ADD ENTRY</button>
+    </div>
+
+    <!-- TAG FILTER BAR -->
+    <div class="tag-filter-bar" id="tag-filter-bar">
+      <span class="tag-filter-label">// FILTER:</span>
+      <button class="tag-filter-btn all-btn active" data-tag="__all__">ALL</button>
+      <div class="tag-filter-divider"></div>
+      <div id="tag-filter-presets" style="display:contents"></div>
+      <div class="tag-filter-divider"></div>
+      <input class="tag-custom-input" id="tag-custom-input" type="text" placeholder="NEW TAG..." maxlength="24" />
+      <button class="tag-custom-add" id="tag-custom-add-btn">+ ADD</button>
     </div>
 
     <div class="sidebar-layout">
@@ -75,6 +90,18 @@
   </div>
 </div>
 
+<div id="search-results-modal">
+  <div id="search-results-content">
+    <div id="search-results-header">
+      <h2>SEARCH RESULTS</h2>
+      <button id="search-results-close">// CLOSE</button>
+    </div>
+    <ul id="search-results-list">
+      <li style="padding:1rem;color:var(--text-dim);text-align:center;">Enter search terms to find entries</li>
+    </ul>
+  </div>
+</div>
+
 <script src="assets/js/github.js"></script>
 <script src="assets/js/auth.js"></script>
 <script src="assets/js/page.js"></script>
@@ -86,7 +113,8 @@
       viewerId: 'species-viewer',
       editorBarId: 'editor-bar',
       addBtnId: 'species-add-btn',
-      dataFile: 'species.json'
+      dataFile: 'species.json',
+      tagFilterBarId: 'tag-filter-bar'
     });
   });
 </script>

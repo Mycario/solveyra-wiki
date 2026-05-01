@@ -166,17 +166,19 @@ function initSidebarPage(config) {
   let activeIndex = null; // index into currentData.entries
   let activeTag = '__all__';
 
-  // ── Preset tags for tech page ──
-  const PRESET_TAGS = ['Infrastructure', 'Energy', 'Weapon', 'Drone', 'Transport', 'Computing', 'FTL'];
+  // ── Preset tags (technology page only) ──
+  const PRESET_TAGS = dataFile === 'technology.json' ? ['Infrastructure', 'Energy', 'Weapon', 'Drone', 'Transport', 'Computing', 'FTL'] : [];
 
-  // ── Custom tags (persisted in localStorage so they survive across sessions) ──
+  // ── Custom tags (persisted in localStorage) ──
+  // Technology uses 'solv_custom_tags_tech'; other pages use shared 'solv_custom_tags_global'
+  const customTagsKey = dataFile === 'technology.json' ? 'solv_custom_tags_tech' : 'solv_custom_tags_global';
   let customTags = [];
   try {
-    customTags = JSON.parse(localStorage.getItem('solv_custom_tags') || '[]');
+    customTags = JSON.parse(localStorage.getItem(customTagsKey) || '[]');
   } catch(e) { customTags = []; }
 
   function saveCustomTags() {
-    localStorage.setItem('solv_custom_tags', JSON.stringify(customTags));
+    localStorage.setItem(customTagsKey, JSON.stringify(customTags));
   }
 
   // ── Tag filter bar init ──
@@ -741,5 +743,100 @@ function initSharedUI() {
   initAuth().then(() => {
     loadGithubConfig();
     initConfigPanel();
+  });
+
+  // ── GLOBAL SEARCH ──
+  const searchInput = document.getElementById('global-search-input');
+  const searchModal = document.getElementById('search-results-modal');
+  const searchResultsList = document.getElementById('search-results-list');
+  const searchCloseBtn = document.getElementById('search-results-close');
+
+  if (!searchInput) return;
+
+  let allData = {};
+  const dataFiles = ['lore.json', 'overview.json', 'species.json', 'technology.json'];
+  const pageLabels = {
+    'lore.json': 'LORE',
+    'overview.json': 'OVERVIEW',
+    'species.json': 'SPECIES',
+    'technology.json': 'TECHNOLOGY'
+  };
+
+  // Load all data files once
+  Promise.all(dataFiles.map(file => loadData(file).then(d => ({ file, data: d.content })))).then(results => {
+    results.forEach(({ file, data }) => {
+      allData[file] = data.entries || [];
+    });
+  });
+
+  function performSearch(query) {
+    if (!query.trim()) {
+      searchModal.classList.remove('open');
+      return;
+    }
+
+    const q = query.toLowerCase();
+    const results = [];
+
+    Object.entries(allData).forEach(([file, entries]) => {
+      const page = pageLabels[file];
+      entries.forEach((entry, idx) => {
+        const titleMatch = entry.title && entry.title.toLowerCase().includes(q);
+        const bodyMatch = entry.body && entry.body.toLowerCase().includes(q);
+        const tagsMatch = entry.tags && entry.tags.some(t => t.toLowerCase().includes(q));
+
+        if (titleMatch || bodyMatch || tagsMatch) {
+          const snippet = entry.body ? entry.body.substring(0, 100).replace(/\n/g, ' ') + '...' : '(no description)';
+          results.push({
+            page,
+            file,
+            title: entry.title,
+            snippet,
+            tags: entry.tags || [],
+            idx
+          });
+        }
+      });
+    });
+
+    // Render results
+    if (results.length === 0) {
+      searchResultsList.innerHTML = '<li style="padding:1rem;color:var(--text-dim);text-align:center;">No matches found</li>';
+    } else {
+      searchResultsList.innerHTML = results.map(r => `
+        <li class="search-result-item" data-file="${r.file}" data-idx="${r.idx}">
+          <div class="search-result-page">${r.page}</div>
+          <div class="search-result-title">${escapeHtml(r.title)}</div>
+          <div class="search-result-snippet">${escapeHtml(r.snippet)}</div>
+          ${r.tags.length > 0 ? `<div class="search-result-tags">${r.tags.map(t => `<span class="search-result-tag">${escapeHtml(t)}</span>`).join('')}</div>` : ''}
+        </li>
+      `).join('');
+
+      // Attach click handlers to results
+      searchResultsList.querySelectorAll('.search-result-item').forEach(li => {
+        li.addEventListener('click', () => {
+          const file = li.dataset.file;
+          const dataMap = {
+            'lore.json': 'lore.html',
+            'overview.json': 'overview.html',
+            'species.json': 'species.html',
+            'technology.json': 'technology.html'
+          };
+          window.location.href = dataMap[file];
+        });
+      });
+    }
+
+    searchModal.classList.add('open');
+  }
+
+  searchInput.addEventListener('input', (e) => performSearch(e.target.value));
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape') searchModal.classList.remove('open');
+  });
+
+  if (searchCloseBtn) searchCloseBtn.addEventListener('click', () => searchModal.classList.remove('open'));
+  if (searchModal) searchModal.addEventListener('click', (e) => {
+    if (e.target === searchModal) searchModal.classList.remove('open');
   });
 }

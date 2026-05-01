@@ -158,6 +158,10 @@
     </div>
   </header>
 
+  <div id="search-bar-container">
+    <input id="global-search-input" type="text" placeholder="SEARCH ENTRIES..." maxlength="100" />
+  </div>
+
   <nav id="site-nav">
     <a class="nav-link" href="index.html" onclick="SFX&&SFX.click()">// HOME</a>
     <a class="nav-link" href="overview.html" onclick="SFX&&SFX.click()">// OVERVIEW</a>
@@ -222,6 +226,18 @@
     <div style="margin-top:1rem;text-align:right">
       <button id="login-close" style="background:none;border:none;color:var(--text-dim);font-family:var(--font-mono);font-size:0.65rem;letter-spacing:0.1em;cursor:pointer;text-transform:uppercase">// ABORT</button>
     </div>
+  </div>
+</div>
+
+<div id="search-results-modal">
+  <div id="search-results-content">
+    <div id="search-results-header">
+      <h2>SEARCH RESULTS</h2>
+      <button id="search-results-close">// CLOSE</button>
+    </div>
+    <ul id="search-results-list">
+      <li style="padding:1rem;color:var(--text-dim);text-align:center;">Enter search terms to find entries</li>
+    </ul>
   </div>
 </div>
 
