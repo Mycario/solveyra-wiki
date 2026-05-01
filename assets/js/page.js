@@ -75,14 +75,14 @@ function initSidebarPage(config) {
   // ── Preset tags for tech page ──
   const PRESET_TAGS = ['Infrastructure', 'Energy', 'Weapon', 'Drone', 'Transport', 'Computing', 'FTL'];
 
-  // ── Custom tags (persisted in sessionStorage so they survive page refreshes) ──
+  // ── Custom tags (persisted in localStorage so they survive across sessions) ──
   let customTags = [];
   try {
-    customTags = JSON.parse(sessionStorage.getItem('solv_custom_tags') || '[]');
+    customTags = JSON.parse(localStorage.getItem('solv_custom_tags') || '[]');
   } catch(e) { customTags = []; }
 
   function saveCustomTags() {
-    sessionStorage.setItem('solv_custom_tags', JSON.stringify(customTags));
+    localStorage.setItem('solv_custom_tags', JSON.stringify(customTags));
   }
 
   // ── Tag filter bar init ──
@@ -157,11 +157,20 @@ function initSidebarPage(config) {
       // Delete button for custom tags — only visible in editor mode
       if (isCustom) {
         const del = document.createElement('button');
-        del.className = 'tag-filter-btn';
+        del.className = 'tag-del-btn';
         del.title = `Remove tag "${tag}"`;
         del.textContent = '×';
-        del.style.cssText = 'padding:0.25rem 0.4rem;border-color:#662200;color:#aa4400;display:' + (isLoggedIn() ? 'inline-block' : 'none');
-        del.id = `tag-del-${tag}`;
+        del.style.cssText = `
+          background:none;
+          border:none;
+          color:#aa4400;
+          font-family:var(--font-mono);
+          font-size:0.7rem;
+          cursor:pointer;
+          padding:0 3px;
+          line-height:1;
+          display:${isLoggedIn() ? 'inline-block' : 'none'};
+        `;
         del.addEventListener('click', (e) => {
           e.stopPropagation();
           customTags = customTags.filter(t => t !== tag);

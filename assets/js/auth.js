@@ -32,6 +32,7 @@ function logout() {
   document.body.classList.remove('editor-active');
   document.querySelectorAll('.editor-bar').forEach(b => b.classList.remove('visible'));
   updateLoginTrigger();
+  document.dispatchEvent(new CustomEvent('editorStateChange', { detail: { loggedIn: false } }));
 }
 
 function updateLoginTrigger() {
@@ -82,6 +83,7 @@ async function initAuth() {
       input.value = '';
       if (errorMsg) errorMsg.classList.remove('visible');
       updateLoginTrigger();
+      document.dispatchEvent(new CustomEvent('editorStateChange', { detail: { loggedIn: true } }));
       if (typeof initConfigPanel === 'function') initConfigPanel();
     } else {
       if (errorMsg) { errorMsg.textContent = '// ACCESS DENIED — INVALID CREDENTIALS'; errorMsg.classList.add('visible'); }
