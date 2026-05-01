@@ -745,22 +745,6 @@ function initSharedUI() {
     initConfigPanel();
   });
 
-  // ── GLOBAL SEARCH ──
-  const searchInput = document.getElementById('global-search-input');
-  const searchModal = document.getElementById('search-results-modal');
-  const searchResultsList = document.getElementById('search-results-list');
-  const searchCloseBtn = document.getElementById('search-results-close');
-
-  if (!searchInput) return;
-
-  let allData = {};
-  const dataFiles = ['lore.json', 'overview.json', 'species.json', 'technology.json'];
-  const pageLabels = {
-    'lore.json': 'LORE',
-    'overview.json': 'OVERVIEW',
-    'species.json': 'SPECIES',
-    'technology.json': 'TECHNOLOGY'
-  };
 
   // Load all data files once
   Promise.all(dataFiles.map(file => loadData(file).then(d => ({ file, data: d.content })))).then(results => {
