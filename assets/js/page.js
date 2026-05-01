@@ -725,10 +725,6 @@ function showEntryForm({ existing, availableTags = [], onSave }) {
   });
 }
 
-// ─── SHARED HEADER/FOOTER INIT ────────────────────────────────────────────────
-
-// Utility: Generate password hash for config.json
-// Usage in console: generatePasswordHash('password', 'salt') then copy result
 async function generatePasswordHash(password = 'Solveyra', salt = 'solv-wiki-salt-2025') {
   const encoder = new TextEncoder();
   const data = encoder.encode(password + salt);
@@ -744,6 +740,23 @@ function initSharedUI() {
     loadGithubConfig();
     initConfigPanel();
   });
+
+    // ── GLOBAL SEARCH ──
+  const searchInput = document.getElementById('global-search-input');
+  const searchModal = document.getElementById('search-results-modal');
+  const searchResultsList = document.getElementById('search-results-list');
+  const searchCloseBtn = document.getElementById('search-results-close');
+
+  if (!searchInput) return;
+
+  let allData = {};
+  const dataFiles = ['lore.json', 'overview.json', 'species.json', 'technology.json'];
+  const pageLabels = {
+    'lore.json': 'LORE',
+    'overview.json': 'OVERVIEW',
+    'species.json': 'SPECIES',
+    'technology.json': 'TECHNOLOGY'
+  };
   
   // Load all data files once
   Promise.all(dataFiles.map(file => loadData(file).then(d => ({ file, data: d.content })))).then(results => {
