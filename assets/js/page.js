@@ -830,7 +830,11 @@ function initSharedUI() {
     searchModal.classList.add('open');
   }
 
-  searchInput.addEventListener('input', (e) => performSearch(e.target.value));
+  searchInput.addEventListener('keydown', (e) => {
+    if (e.key === 'Enter') {
+      performSearch(e.target.value);
+    }
+  });
   searchInput.addEventListener('keydown', (e) => {
     if (e.key === 'Escape') searchModal.classList.remove('open');
   });
