@@ -1,4 +1,4 @@
-async function hashPassword(password, salt = '') {
+async function hashPassword(password, salt = 'solv-wiki-salt-2025') {
   const encoder = new TextEncoder();
   const data = encoder.encode(password + salt);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
