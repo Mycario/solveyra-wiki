@@ -65,12 +65,13 @@
         <span class="panel-tag">// required for saves</span>
       </div>
       <div class="panel-body">
-        <p style="color:var(--text-mid);font-size:0.8rem;margin-bottom:1rem">// Enter your GitHub credentials to enable saving. Stored in session memory only</p>
+        <p style="color:var(--text-mid);font-size:0.8rem;margin-bottom:1rem">// Enter your GitHub credentials to enable saving. Stored in session memory only.</p>
+        <p style="color:var(--amber-bright);font-size:0.75rem;margin-bottom:1rem">⚠ WARNING: GitHub token will be visible in DevTools. Tokens are session-only (lost on refresh), not persisted.</p>
         <label class="form-label">GitHub Username</label>
-        <input id="config-owner" class="form-input" type="text" placeholder="your-github-username" autocomplete="off" value="Mycario" />
+        <input id="config-owner" class="form-input" type="text" placeholder="your-github-username" autocomplete="off" />
         <label class="form-label">Personal Access Token</label>
         <input id="config-token" class="form-input" type="password" placeholder="ghp_xxxxxxxxxxxx" autocomplete="off" />
-        <p class="form-hint">Token needs repo read/write scope. Never stored in code.</p>
+        <p class="form-hint">Token needs repo read/write scope. Create at github.com/settings/tokens</p>
         <div class="form-actions" style="margin-top:1rem">
           <button id="config-save" class="form-save-btn">SAVE CONFIG</button>
         </div>

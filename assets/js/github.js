@@ -1,5 +1,5 @@
 function loadGithubConfig() {
-  window.GITHUB_OWNER = sessionStorage.getItem('solv_gh_owner') || 'Mycario';
+  window.GITHUB_OWNER = sessionStorage.getItem('solv_gh_owner') || '';
   window.GITHUB_TOKEN = sessionStorage.getItem('solv_gh_token') || '';
   window.GITHUB_REPO = 'Solveyra-wiki';
   window.GITHUB_BRANCH = 'main';
@@ -72,7 +72,7 @@ function initConfigPanel() {
   const saveBtn = document.getElementById('config-save');
   const status = document.getElementById('config-status');
 
-  if (ownerInput) ownerInput.value = window.GITHUB_OWNER;
+  if (ownerInput) ownerInput.value = window.GITHUB_OWNER || '';
 
   if (saveBtn) {
     saveBtn.addEventListener('click', () => {

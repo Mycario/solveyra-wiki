@@ -725,6 +725,18 @@ function showEntryForm({ existing, availableTags = [], onSave }) {
 
 // ─── SHARED HEADER/FOOTER INIT ────────────────────────────────────────────────
 
+// Utility: Generate password hash for config.json
+// Usage in console: generatePasswordHash('password', 'salt') then copy result
+async function generatePasswordHash(password = 'Solveyra', salt = 'solv-wiki-salt-2025') {
+  const encoder = new TextEncoder();
+  const data = encoder.encode(password + salt);
+  const hashBuffer = await crypto.subtle.digest('SHA-256', data);
+  const hashArray = Array.from(new Uint8Array(hashBuffer));
+  const hash = hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
+  console.log(`Password hash generated:\n"${hash}"\n\nCopy this value into data/config.json as the "passwordHash" value.`);
+  return hash;
+}
+
 function initSharedUI() {
   initAuth().then(() => {
     loadGithubConfig();

@@ -1,0 +1,10 @@
+{
+  "passwordHash": null,
+  "passwordSalt": "solv-wiki-salt-2025",
+  "_instructions": {
+    "description": "Auth configuration for Solveyra wiki. Password stored as SHA256 hash for security.",
+    "generateHash": "To generate a new password hash, open browser DevTools console and run: await hashPassword('YOUR_PASSWORD', 'YOUR_SALT')",
+    "example": "If using password 'Solveyra' with salt 'solv-wiki-salt-2025', first run the generateHash command to get the hash value, then paste it below.",
+    "security": "Storing hash here instead of in code prevents immediate exposure. Still keep this repo private."
+  }
+}

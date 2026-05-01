@@ -1,20 +1,41 @@
-async function hashPassword(password) {
+async function hashPassword(password, salt = '') {
   const encoder = new TextEncoder();
-  const data = encoder.encode(password);
+  const data = encoder.encode(password + salt);
   const hashBuffer = await crypto.subtle.digest('SHA-256', data);
   const hashArray = Array.from(new Uint8Array(hashBuffer));
   return hashArray.map(b => b.toString(16).padStart(2, '0')).join('');
 }
 
+let authConfig = null;
+
+async function loadAuthConfig() {
+  try {
+    const res = await fetch('data/config.json');
+    if (!res.ok) return null;
+    return await res.json();
+  } catch (e) {
+    console.warn('Auth config not found, using fallback:', e.message);
+    return null;
+  }
+}
+
 async function initCorrectHash() {
   if (!sessionStorage.getItem('solv_correct')) {
-    const h = await hashPassword('Solveyra');
-    sessionStorage.setItem('solv_correct', h);
+    authConfig = await loadAuthConfig();
+    if (authConfig && authConfig.passwordHash) {
+      sessionStorage.setItem('solv_correct', authConfig.passwordHash);
+    } else {
+      // Fallback: hash 'Solveyra' with no salt (backward compatible)
+      const h = await hashPassword('Solveyra');
+      sessionStorage.setItem('solv_correct', h);
+      authConfig = { passwordHash: h, passwordSalt: '' };
+    }
   }
 }
 
 async function attemptLogin(password) {
-  const hash = await hashPassword(password);
+  const salt = authConfig?.passwordSalt || '';
+  const hash = await hashPassword(password, salt);
   const correct = sessionStorage.getItem('solv_correct');
   if (correct && hash === correct) {
     sessionStorage.setItem('solv_auth', 'true');
