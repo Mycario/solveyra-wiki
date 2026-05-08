@@ -20,13 +20,13 @@ async function loadAuthConfig() {
 }
 
 async function initCorrectHash() {
-  if (!sessionStorage.getItem('solv_correct')) {
+  if (!localStorage.getItem('solv_correct')) {
     authConfig = await loadAuthConfig();
     if (authConfig && authConfig.passwordHash) {
-      sessionStorage.setItem('solv_correct', authConfig.passwordHash);
+      localStorage.setItem('solv_correct', authConfig.passwordHash);
     } else {
       const h = await hashPassword('Solveyra');
-      sessionStorage.setItem('solv_correct', h);
+      localStorage.setItem('solv_correct', h);
       authConfig = { passwordHash: h, passwordSalt: 'solv-wiki-salt-2025' };
     }
   }
@@ -35,20 +35,20 @@ async function initCorrectHash() {
 async function attemptLogin(password) {
   const salt = authConfig?.passwordSalt || '';
   const hash = await hashPassword(password, salt);
-  const correct = sessionStorage.getItem('solv_correct');
+  const correct = localStorage.getItem('solv_correct');
   if (correct && hash === correct) {
-    sessionStorage.setItem('solv_auth', 'true');
+    localStorage.setItem('solv_auth', 'true');
     return true;
   }
   return false;
 }
 
 function isLoggedIn() {
-  return sessionStorage.getItem('solv_auth') === 'true';
+  return localStorage.getItem('solv_auth') === 'true';
 }
 
 function logout() {
-  sessionStorage.removeItem('solv_auth');
+  localStorage.removeItem('solv_auth');
   document.body.classList.remove('editor-active');
   document.querySelectorAll('.editor-bar').forEach(b => b.classList.remove('visible'));
   if (typeof SFX !== 'undefined') SFX.logout();
