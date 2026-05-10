@@ -55,6 +55,15 @@ async function loadData(filename) {
 async function saveEntry(filename, entries, sha) {
   loadGithubConfig();
   if (!window.GITHUB_OWNER || !window.GITHUB_TOKEN) throw new Error('GitHub not configured. Enter credentials on the home page.');
+  
+  // Fetch the latest SHA to avoid conflicts
+  try {
+    const result = await githubGetFile(`data/${filename}`);
+    if (result) sha = result.sha;
+  } catch (e) {
+    console.warn('Could not fetch latest SHA, using provided one:', e);
+  }
+  
   const content = { entries, lastUpdated: new Date().toISOString() };
   return await githubSaveFile(`data/${filename}`, content, sha, `Update ${filename}`);
 }
