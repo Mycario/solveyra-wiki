@@ -14,19 +14,25 @@ function setGithubConfig(owner, token) {
 async function githubGetFile(path) {
   loadGithubConfig();
   const url = `https://api.github.com/repos/${window.GITHUB_OWNER}/${window.GITHUB_REPO}/contents/${path}?ref=${window.GITHUB_BRANCH}`;
+  console.log(`Fetching ${path} from GitHub...`);
   const res = await fetch(url, {
     headers: { 'Authorization': `token ${window.GITHUB_TOKEN}`, 'Accept': 'application/vnd.github.v3+json' }
   });
   if (!res.ok) { if (res.status === 404) return null; throw new Error(`GitHub GET failed: ${res.status}`); }
   const data = await res.json();
+  console.log(`GET response sha: ${data.sha}`);
+  console.log(`GET response full:`, data);
   return { content: JSON.parse(atob(data.content.replace(/\n/g, ''))), sha: data.sha };
 }
 
 async function githubSaveFile(path, content, sha, commitMessage) {
   loadGithubConfig();
   const encoded = btoa(unescape(encodeURIComponent(JSON.stringify(content, null, 2))));
+  console.log(`Encoding content for ${path}:`, content);
+  console.log(`Encoded length: ${encoded.length} characters`);
   const body = { message: commitMessage || `Update ${path}`, content: encoded, branch: window.GITHUB_BRANCH };
   if (sha) body.sha = sha;
+  console.log(`Sending PUT with SHA: ${sha}, body:`, body);
   const url = `https://api.github.com/repos/${window.GITHUB_OWNER}/${window.GITHUB_REPO}/contents/${path}`;
   const res = await fetch(url, {
     method: 'PUT',
@@ -39,7 +45,10 @@ async function githubSaveFile(path, content, sha, commitMessage) {
     throw new Error(`GitHub save failed: ${err.message}`); 
   }
   const result = await res.json();
-  console.log(`GitHub save succeeded for ${path}. New SHA: ${result.content?.sha}`);
+  console.log(`GitHub save succeeded for ${path}.`);
+  console.log(`Response content.sha: ${result.content?.sha}`);
+  console.log(`Response commit.sha: ${result.commit?.sha}`);
+  console.log(`Full response:`, result);
   return result;
 }
 
