@@ -653,7 +653,16 @@ function showEntryForm({ existing, availableTags = [], onSave }) {
 
 // ─── SHARED INIT ─────────────────────────────────────────────────────────────
 
+function setActiveNavLink() {
+  const current = window.location.pathname.split('/').pop() || 'index.html';
+  document.querySelectorAll('.nav-link').forEach(link => {
+    const href = link.getAttribute('href');
+    link.classList.toggle('active', href === current);
+  });
+}
+
 function initSharedUI() {
+  setActiveNavLink();
   initAuth().then(() => {
     loadGithubConfig();
     initConfigPanel();
