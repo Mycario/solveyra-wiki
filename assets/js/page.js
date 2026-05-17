@@ -29,40 +29,26 @@ const SFX = (() => {
   }
 
   return {
-    click() {
-      tone({ freq: 880, freq2: 660, type: 'sine', gain: 0.08, attack: 0.005, sustain: 0.02, release: 0.06 });
-    },
+    click() { tone({ freq: 880, freq2: 660, type: 'sine', gain: 0.08, attack: 0.005, sustain: 0.02, release: 0.06 }); },
     open() {
       tone({ freq: 520, type: 'sine', gain: 0.1, attack: 0.01, sustain: 0.05, release: 0.15 });
       tone({ freq: 780, type: 'sine', gain: 0.06, attack: 0.01, sustain: 0.03, release: 0.1, delay: 0.04 });
     },
-    formOpen() {
-      tone({ freq: 440, freq2: 600, type: 'sine', gain: 0.1, attack: 0.01, sustain: 0.08, release: 0.18 });
-    },
-    formClose() {
-      tone({ freq: 500, freq2: 340, type: 'sine', gain: 0.08, attack: 0.01, sustain: 0.05, release: 0.12 });
-    },
+    formOpen() { tone({ freq: 440, freq2: 600, type: 'sine', gain: 0.1, attack: 0.01, sustain: 0.08, release: 0.18 }); },
+    formClose() { tone({ freq: 500, freq2: 340, type: 'sine', gain: 0.08, attack: 0.01, sustain: 0.05, release: 0.12 }); },
     success() {
       tone({ freq: 660, type: 'sine', gain: 0.1, attack: 0.01, sustain: 0.06, release: 0.1 });
       tone({ freq: 880, type: 'sine', gain: 0.08, attack: 0.01, sustain: 0.06, release: 0.12, delay: 0.08 });
       tone({ freq: 1100, type: 'sine', gain: 0.06, attack: 0.01, sustain: 0.08, release: 0.15, delay: 0.16 });
     },
-    error() {
-      tone({ freq: 300, freq2: 180, type: 'sawtooth', gain: 0.12, attack: 0.005, sustain: 0.1, release: 0.15 });
-    },
+    error() { tone({ freq: 300, freq2: 180, type: 'sawtooth', gain: 0.12, attack: 0.005, sustain: 0.1, release: 0.15 }); },
     loginSuccess() {
       tone({ freq: 480, type: 'sine', gain: 0.1, attack: 0.01, sustain: 0.05, release: 0.1 });
       tone({ freq: 720, type: 'sine', gain: 0.08, attack: 0.01, sustain: 0.08, release: 0.15, delay: 0.07 });
     },
-    logout() {
-      tone({ freq: 600, freq2: 360, type: 'sine', gain: 0.09, attack: 0.01, sustain: 0.1, release: 0.2 });
-    },
-    filter() {
-      tone({ freq: 740, type: 'sine', gain: 0.07, attack: 0.005, sustain: 0.02, release: 0.08 });
-    },
-    del() {
-      tone({ freq: 200, freq2: 140, type: 'triangle', gain: 0.12, attack: 0.005, sustain: 0.06, release: 0.18 });
-    }
+    logout() { tone({ freq: 600, freq2: 360, type: 'sine', gain: 0.09, attack: 0.01, sustain: 0.1, release: 0.2 }); },
+    filter() { tone({ freq: 740, type: 'sine', gain: 0.07, attack: 0.005, sustain: 0.02, release: 0.08 }); },
+    del() { tone({ freq: 200, freq2: 140, type: 'triangle', gain: 0.12, attack: 0.005, sustain: 0.06, release: 0.18 }); }
   };
 })();
 
@@ -125,10 +111,7 @@ function renderDocContent(entry) {
 // ─── SIDEBAR + VIEWER PAGE ────────────────────────────────────────────────────
 
 function initSidebarPage(config) {
-  const {
-    sidebarId, viewerId, editorBarId, addBtnId, dataFile,
-    tagFilterBarId, sidebarCountId
-  } = config;
+  const { sidebarId, viewerId, editorBarId, addBtnId, dataFile, tagFilterBarId, sidebarCountId } = config;
 
   const sidebar = document.getElementById(sidebarId);
   const viewer = document.getElementById(viewerId);
@@ -148,7 +131,6 @@ function initSidebarPage(config) {
   try { customTags = JSON.parse(localStorage.getItem(customTagsKey) || '[]'); } catch(e) { customTags = []; }
   function saveCustomTags() { localStorage.setItem(customTagsKey, JSON.stringify(customTags)); }
 
-  // ── Tag filter bar ──
   const filterBar = tagFilterBarId ? document.getElementById(tagFilterBarId) : null;
   let filterExpanded = false;
 
@@ -273,7 +255,6 @@ function initSidebarPage(config) {
   if (customAddBtn) customAddBtn.addEventListener('click', addCustomTag);
   if (customInput) customInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') addCustomTag(); });
 
-  // ── Load ──
   async function loadEntries() {
     const result = await loadData(dataFile);
     currentData = { entries: result.content.entries || [], sha: result.sha };
@@ -293,7 +274,6 @@ function initSidebarPage(config) {
     return currentData.entries.filter(e => (e.tags || []).includes(activeTag));
   }
 
-  // ── Sidebar ──
   function renderSidebar() {
     const list = sidebar?.querySelector('.sidebar-list');
     if (!list) return;
@@ -342,7 +322,6 @@ function initSidebarPage(config) {
     });
   }
 
-  // ── Viewer ──
   function showEntry(idx) {
     activeIndex = idx;
     const entry = currentData.entries[idx];
@@ -396,7 +375,6 @@ function initSidebarPage(config) {
     if (body) body.innerHTML = `<div class="doc-viewer-empty">// SELECT AN ENTRY FROM THE SIDEBAR</div>`;
   }
 
-  // ── Delete ──
   async function deleteEntry(idx) {
     const title = currentData.entries[idx]?.title || `Entry ${idx + 1}`;
     if (!confirm(`Delete "${title}"?`)) return;
@@ -418,7 +396,6 @@ function initSidebarPage(config) {
 
   loadEntries();
 
-  // ── Form ──
   function openForm(editIdx) {
     const existing = editIdx !== null ? currentData.entries[editIdx] : null;
     const allAvailableTags = [...new Set([
@@ -654,10 +631,16 @@ function showEntryForm({ existing, availableTags = [], onSave }) {
 // ─── SHARED INIT ─────────────────────────────────────────────────────────────
 
 function setActiveNavLink() {
-  const current = window.location.pathname.split('/').pop() || 'index.html';
+  // Get current filename, defaulting to index.html for root paths
+  let current = window.location.pathname.split('/').pop();
+  if (!current || current === '') current = 'index.html';
+
+  // Remove ALL active classes first, then set only the matching one
   document.querySelectorAll('.nav-link').forEach(link => {
-    const href = link.getAttribute('href');
-    link.classList.toggle('active', href === current);
+    link.classList.remove('active');
+    if (link.getAttribute('href') === current) {
+      link.classList.add('active');
+    }
   });
 }
 
