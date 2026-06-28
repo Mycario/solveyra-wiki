@@ -91,9 +91,12 @@
       "imageCaption": "",
       "infoboxTitle": "",
       "infoboxRows": [],
-      "tags": [],
+      "tags": [
+        "Nation",
+        "Government"
+      ],
       "timestamp": "2026-06-28T08:40:34.672Z"
     }
   ],
-  "lastUpdated": "2026-06-28T08:40:34.672Z"
+  "lastUpdated": "2026-06-28T08:40:53.392Z"
 }
