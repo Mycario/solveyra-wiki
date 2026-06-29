@@ -29,8 +29,8 @@
     },
     {
       "title": "Velundra",
-      "subtitle": "",
-      "body": "Velundra is a large ocean world, or a Hycean (bigger then earth, smaller then neptune), it's atmosphere is incredibly rich in hydrogen, taking up 70% of it, with 20% being oxygen and the remaining 10% being varied gases.\n\nThe planet itself is inspired by K-18B, with it's size and general environment being the same, however what makes it different is life (duh).\n\nVelundra's oceans are around 1000km deep and are arranged in a sort of 'tier' system, that being the Surface, Deep, and Abyss\n\nThe Surface, ranging from the surface (duh) down to around 300km, is where a large % of life comes from, spare for the Velnorca.\n\nThe deep ranged from 300km to 700km, it is the largest 'layer' and where Velnorca originally came from.\n\nThe Abyss itself ranges from 700km to the bottom, its the most dangerous part due to the shear pressure but it's also the richest part, containing crystals vital to Solveyra's energy technology.\n\nVelundra has no solid surface, the entire planet is liquid, with it's mass being 40% ocean, it's gravity is around 1.2gs of force.",
+      "subtitle": "Homeworld",
+      "body": "Velundra is a Hycean world, larger then Earth but smaller then Neptune, orbiting the red dwarf Varn with an orbit period of roughly 30 days. It is the only body in the Varn system within the habitable zone. It's mass is approximately 40% water with no exposed landmass anywhere on it's surface. The planet does have a rocky core but it sits entirely beneath the ocean with no surface expression. Velundra's gravity is approximately 1.2G.\n\nThe atmosphere is dense and hydrogen rich, composed of roughly 70% hydrogen, 20% oxygen and 10% varied gases. Surface light from Varn is dim and light penetration into the ocean is minimal. From the Shallows onwards Velundra's oceans are dark, with it being navigated by it's inhabitants using echolocation and bioluminescence.",
       "image": "https://images.newscientist.com/wp-content/uploads/2025/07/25165419/SEI_260079229.jpg",
       "imageCaption": "Velundra",
       "infoboxTitle": "",
@@ -98,5 +98,5 @@
       "timestamp": "2026-06-28T08:40:34.672Z"
     }
   ],
-  "lastUpdated": "2026-06-28T08:40:53.392Z"
+  "lastUpdated": "2026-06-29T10:25:42.137Z"
 }
