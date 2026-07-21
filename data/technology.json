@@ -35,7 +35,21 @@
         "FTL"
       ],
       "timestamp": "2026-05-17T00:04:33.843Z"
+    },
+    {
+      "title": "Varn Dyson Swarm",
+      "subtitle": "Megastructure",
+      "body": "The Varn Dyson Swarm is a complete stellar energy collection structure surrounding the red dwarf star 'Varn', consisting of thousands of satellites, all dedicated to collecting solar energy, surrounding the star. It is the largest engineering project undertaken by Solveyra and the foundation that keeps the nation's industry working.\n\nThe swarm exists for a singular purpose, to harvest energy from Varn and deliver it to Velundra. Each satellite in the network is a singular unit, equipped with both solar panels and a transmission device, which is used to beam the harvested energy back down to the collection towers on Velundra's surface. These towers are capped with a large Elenaric crystal array that receives the energy and routes it back into the grid below.\n\nConstruction of the swarm began following the discovery and large scale adoption of Elenaric Crystals as the basis of Solveyra's energy infrastructure. With a functional energy grid in place the logical next step was to harvest the power from the local star and thus the Swarm Project was approved by the council.\n\nConstruction happened over roughly 2 centuries using a self sustaining loop. Initial satellites were launched from the Energy collection towers using directed energy propulsion, these formed the first 'shell' around Varn. As that shell started to transmit energy that was used to power more launches and this happened over the course of these 2 centuries.\n\nThe swarm is composed of multiple concentric orbital shells at varying distances from Varn, each populated by thousands of smaller satellites. Individual units are rather simple in design, a solar panel array, an onboard power storage system, an energy transmission device and a propulsion system to maintain it's position. There is no central hub or coordinating superstructure as each satellite acts independently, transmitting on a scheduled cycle coordinated by ground based systems.\n\nThe receiving end of the network on Velundra's surface consists of the Energy collection towers, large industrial structures with 90% of their structure underwater, their cap being a large Elenaric Crystal Array which receives transmitted energy. These are the most visible part of Solveyran civilization on Velundra.\n\nThe swarm is maintained entirely by automated drone systems. No Velnorca has ever been in the swarm. Maintenance drones are launched from the Energy Collection Towers, they perform a regular inspection, doing any repairs needed, replacing damaged components and adjusting any orbital positions. The failure of any number of individual satellites has a negligible impact on the overall output given the scale and fluidity of the 'structure'.\n\nThe swarm does not have any economic cost in the conventional sense due to the lack of currency within Solveyran society. What it does require is labor through the contribution of engineers, drone operators, materials workers and scientists who maintain the ground system and automated maintenance fleet. This contribution is given freely in the same way all contribution in Solveyra is given.\n\nThe economic impact of the swarm has completely transformative, energy scarcity has always been a problem for Solveyra. The swarm eliminated said scarcity and allowed for untold expansion, both down and around, and the research impact was also great, paving the way for interstellar drones and the eventual accidental discovery of FTL.\n\nThe swarm's cultural impact is more practical then anything else. It's seen as vital infrastructure, not worshiped or romanticized. However it is still a sign of national pride and is routinely taught as an example of what Solveyra is capable of given commitment and patience.",
+      "image": "",
+      "imageCaption": "",
+      "infoboxTitle": "",
+      "infoboxRows": [],
+      "tags": [
+        "Infrastructure",
+        "Energy"
+      ],
+      "timestamp": "2026-07-21T23:51:24.575Z"
     }
   ],
-  "lastUpdated": "2026-05-17T00:04:33.843Z"
+  "lastUpdated": "2026-07-21T23:51:24.575Z"
 }
