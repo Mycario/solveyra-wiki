@@ -49,7 +49,21 @@
         "Energy"
       ],
       "timestamp": "2026-07-21T23:51:24.575Z"
+    },
+    {
+      "title": "Drysuit Walkers",
+      "subtitle": "Mech",
+      "body": "Drysuit Walkers are a form of Mechsuit used in Solveyra primarily for above water operations, more specifically maintenance in Energy Collection Towers (ECT) as the biological constraints imposed on Velnorca due to their deep sea lives cause lower pressure areas to be incredibly dangerous and near instantly fatal.\n\nDrysuits circumnavigate that constraint by bringing the environment found within the natural habitat of Solveyra to the surface, with the body being an alloy of steel and Elenaric crystals, the interior is a sort of fish tank, with a system in place to keep it pressurized to that of 200km below water.\n\nNo glass is present on a Drysuit, with vision being allowed through external cameras, however due to Velnorca being almost entirely blind they 'see' with these cameras by having a temporary implant installed that allows them to directly connect to the mech.\n\nThat allows them to 'see' through the cameras as if they were fully functional eyes. Drysuit walkers do not have any 'weapons' as of, with one arm being a standard claw used to hold stuff whilst the other being a mix between a welder, a naildrill, and other industrial equipment. However this does not mean they're harmless, as with all industrial equipment it can easily be used as a weapon, with the welder capable of being used as a rudimentary laser beam type weapon and the naildrill capable of, well, drilling, and being used as a melee weapon.",
+      "image": "https://img-new.cgtrader.com/items/842490/dd2e780413/industrial-mech-3d-model-dd2e780413.jpg",
+      "imageCaption": "Close design, not exactly it but close enough",
+      "infoboxTitle": "",
+      "infoboxRows": [],
+      "tags": [
+        "Transport",
+        "Industrial"
+      ],
+      "timestamp": "2026-08-13T15:29:54.248Z"
     }
   ],
-  "lastUpdated": "2026-07-21T23:51:24.575Z"
+  "lastUpdated": "2026-08-13T15:29:54.248Z"
 }
