@@ -64,7 +64,7 @@ function nl2br(str) {
 
 // ─── DOCUMENT RENDERER ───────────────────────────────────────────────────────
 
-function renderDocContent(entry) {
+function renderDocContent(entry, currentPage) {
   let html = '';
 
   const hasInfobox = entry.infoboxRows && entry.infoboxRows.length > 0;
@@ -100,12 +100,34 @@ function renderDocContent(entry) {
       } else if (trimmed.startsWith('## ')) {
         html += `<h2>${escapeHtml(trimmed.slice(3))}</h2>`;
       } else {
-        html += `<p>${nl2br(escapeHtml(trimmed))}</p>`;
+        html += `<p>${parseWikiLinks(nl2br(escapeHtml(trimmed)), currentPage)}</p>`;
       }
     });
   }
 
   return html;
+}
+
+// ─── LINKING SYSTEM ────────────────────────────────────────────────────
+
+function slugify(title) {
+  return title.toLowerCase().trim().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
+}
+
+function parseWikiLinks(escapedText, currentPage) {
+  return escapedText.replace(/\[\[([^\]|]+)(?:\|([^\]]+))?\]\]/g, (match, target, label) => {
+    let page = currentPage;
+    let title = target.trim();
+    if (title.includes(':')) {
+      const parts = title.split(':');
+      page = parts[0].trim();
+      title = parts.slice(1).join(':').trim();
+    }
+    const displayText = label ? label.trim() : title;
+    const slug = slugify(title);
+    const href = (page === currentPage) ? `#${slug}` : `${page}.html#${slug}`;
+    return `<a href="${href}" class="doc-link" data-page="${page}" data-slug="${slug}">${displayText}</a>`;
+  });
 }
 
 // ─── SIDEBAR + VIEWER PAGE ────────────────────────────────────────────────────
@@ -148,7 +170,20 @@ function initSidebarPage(config) {
       </div>
     `;
   }
-
+  
+  if (viewer) {
+  viewer.addEventListener('click', (e) => {
+    const link = e.target.closest('.doc-link');
+    if (!link) return;
+    if (link.dataset.page === dataFile.replace('.json', '')) {
+      e.preventDefault();
+      const idx = currentData.entries.findIndex(en => slugify(en.title) === link.dataset.slug);
+      if (idx !== -1) { SFX.open(); showEntry(idx); }
+    }
+    // different page → let the browser follow the href normally
+  });
+  }
+  
   const tagExpandedArea = document.getElementById('tag-expanded-area');
   const tagToggleBtn = document.getElementById('tag-toggle-btn');
   const tagActiveIndicator = document.getElementById('tag-active-indicator');
@@ -256,17 +291,23 @@ function initSidebarPage(config) {
   if (customInput) customInput.addEventListener('keydown', (e) => { if (e.key === 'Enter') addCustomTag(); });
 
   async function loadEntries() {
-    const result = await loadData(dataFile);
-    currentData = { entries: result.content.entries || [], sha: result.sha };
-    renderTagFilterBar();
-    renderSidebar();
-    if (activeIndex !== null && activeIndex < currentData.entries.length) {
-      showEntry(activeIndex);
-    } else if (filteredEntries().length > 0) {
-      showEntry(currentData.entries.indexOf(filteredEntries()[0]));
-    } else {
-      showEmpty();
-    }
+  const result = await loadData(dataFile);
+  currentData = { entries: result.content.entries || [], sha: result.sha };
+  renderTagFilterBar();
+  renderSidebar();
+
+  const hashSlug = location.hash ? location.hash.slice(1) : null;
+  const hashIdx = hashSlug ? currentData.entries.findIndex(en => slugify(en.title) === hashSlug) : -1;
+
+  if (hashIdx !== -1) {
+    showEntry(hashIdx);
+  } else if (activeIndex !== null && activeIndex < currentData.entries.length) {
+    showEntry(activeIndex);
+  } else if (filteredEntries().length > 0) {
+    showEntry(currentData.entries.indexOf(filteredEntries()[0]));
+  } else {
+    showEmpty();
+  }
   }
 
   function filteredEntries() {
@@ -355,7 +396,7 @@ function initSidebarPage(config) {
       </div>
     `;
 
-    body.innerHTML = `<div class="doc-content">${renderDocContent(entry)}</div>`;
+    body.innerHTML = `<div class="doc-content">${renderDocContent(entry, dataFile.replace('.json',''))}</div>`;
 
     const editBtn = header.querySelector('#viewer-edit-btn');
     const deleteBtn = header.querySelector('#viewer-delete-btn');
