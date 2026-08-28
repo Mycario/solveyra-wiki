@@ -27,7 +27,48 @@
         "Industrial"
       ],
       "timestamp": "2026-08-13T15:29:54.248Z"
+    },
+    {
+      "title": "Elenaric Crystals",
+      "subtitle": "",
+      "body": "## What They Do\n\nAn Elenaric Crystal (EC) is a layered crystalline lattice that grows around mineral rich hydrothermal vents in the Abyss layer of Velundra. What makes the EC useful isn't it's hardness or durability, but because it can absorb, hold and re-emit energy at an extraordinarily stable state with almost no loss over time. A raw, unrefined crystal will passively store ambient thermal and electrical energy from it's surroundings for decades without measurable decay.\n\nRefined crystals can be made, if bombarded with a tuned oscillating field rather than left to absorb ambient energy, to release their stored charge in a fast, controlled burst, rather then a slow bleed. That release is what makes them so valuable, with them having a near perfect storage and release of energy.\n\n## What they're used in\n\nECs are used primarily in the energy grid, with their storage property being the primary reason. Solveyra's energy sector is post scarcity, with energy harvested from the Dyson swarm going directly to large crystal arrays acting as energy banks.\n\nECs are also used in industry, with their property of rapid and near perfect energy release being the reason, for CNC machines this is vital, being able to quickly and efficiently cut through even the strongest of materials using pure energy is rather important, even more so due to the lack of standard kinetic forms of machinery that Solveyra lacks.",
+      "image": "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSrJ9kxCKCaN-M7WVnpi_V0NEnmhc6CvE1aYBC43YvBKNkdkV5-O3Z6rtM7&s=10",
+      "imageCaption": "An Elenaric Crystal Deposit",
+      "infoboxTitle": "Elenaric Crystals",
+      "infoboxRows": [
+        {
+          "key": "Classification:",
+          "val": "Exotic Matter"
+        },
+        {
+          "key": "Origin:",
+          "val": "Velundra, Abyssal Hydrothermal formations"
+        },
+        {
+          "key": "Discovery:",
+          "val": "Uncovered during Abyss expedition"
+        },
+        {
+          "key": "Primary Application:",
+          "val": "Energy grid infrastructure"
+        },
+        {
+          "key": "Secondary Application:",
+          "val": "Industry, primarily energy focusing lenses for CNC"
+        },
+        {
+          "key": "Abundance:",
+          "val": "Rare currently, may be more common in unexplored areas."
+        }
+      ],
+      "tags": [
+        "Infrastructure",
+        "Energy",
+        "Industrial",
+        "Resource"
+      ],
+      "timestamp": "2026-08-28T15:03:01.539Z"
     }
   ],
-  "lastUpdated": "2026-08-28T14:38:16.459Z"
+  "lastUpdated": "2026-08-28T15:03:01.539Z"
 }
