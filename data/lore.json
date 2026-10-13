@@ -42,19 +42,6 @@
       "timestamp": "2026-05-01T06:47:04.543Z"
     },
     {
-      "title": "The Breakthrough",
-      "subtitle": "FTL discovery - 30 years before present",
-      "body": "Researchers studying the upper limits of Elenaric Crystal energy focusing, attempting to determine wherever sufficiently concentrated crystal-transmitted energy could be used for large scale propulsion, conducted an experiment in which a massive array of crystals focused a large amount of energy at a probe in low orbit. The probe was not expected to survive, but before disintegrating telemetry data confirmed it had briefly exceeded the speed of light. The result was initially considered just an error, it wasn't. Further experimentation confirmed that the crystals, when used in a sufficient quantity and focus, allowed objects to exceed break relativistic constraints and exceed the speed of light. This mechanism is not fully understood, even today, but what followed was a generation of engineering work to develop a survivable version of the effect. The first practical application was an uncrewed drone, launched towards the nearest system. It arrived and confirmed via a contact return via signal. Solveyra had, entirely by accident, discovered FTL, however no Velnorca has traveled FTL with drones being the primary method used currently.",
-      "image": "",
-      "imageCaption": "",
-      "infoboxTitle": "",
-      "infoboxRows": [],
-      "timestamp": "2026-05-01T06:57:37.725Z",
-      "tags": [
-        "Marked for deletion"
-      ]
-    },
-    {
       "title": "Present day",
       "subtitle": "Current",
       "body": "Solveyra today is a nation in a state of transition. The discovery of FTL has not yet reshaped daily life, though most Velnorca are aware of it in the way one is aware of a scientific achievement, not as something that has changed the world. The council is deliberating on the scope and pace of further interstellar exploration. There is no military to project power, no colonial ambition, and no reason to rush. The prevailing belief remains that the universe is empty, with the drones arrival in a neighboring system showing no signs of intelligent life.",
@@ -65,5 +52,5 @@
       "timestamp": "2026-05-01T06:59:47.930Z"
     }
   ],
-  "lastUpdated": "2026-10-13T05:18:26.432Z"
+  "lastUpdated": "2026-10-13T05:50:42.110Z"
 }
